@@ -4,30 +4,19 @@ namespace App\Controller;
 
 use App\Contact;
 use App\Form\ContactType;
+use App\Message\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Message\Notification;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Notifier\Message\SmsMessage;
 use Symfony\Component\Notifier\TexterInterface;
 
 class NotificationController extends AbstractController
 {
-//    #[Route('/notification', name: 'app_notification')]
- //   public function index(MessageBusInterface $busInterface): Response
- //   {
-//
- //       // ? dispatch confirmation message
- //       $message = "message recup du formulaire";
- //       $busInterface->dispatch(new Notification($message));
-//
- //       //display confirmation to user
- //       return $this->render('notification/index.html.twig');
- //   }
 
     #[Route('/form', name: 'app_form')]
     public function form(MailerInterface $mailer, TexterInterface $texter, Request $request): Response
@@ -37,7 +26,8 @@ class NotificationController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
 
-            if($data->confirmation == 'email'){
+            $bus->dispatch(new Notification('Patience'));
+
 
             $email = (new Email()) // si avec Template TemplatedEmail()
                 ->from('email@demo.com')
@@ -65,12 +55,14 @@ class NotificationController extends AbstractController
             // message validation
             // redirection
 
-        }
 
         $this->addFlash(
             'notice',
             'thanks for the message'
         );
+
+        }
+
 
         return $this->render('home/index.html.twig', [
             'form'=> $form
