@@ -26,8 +26,6 @@ class NotificationController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
 
-            $bus->dispatch(new Notification('Patience'));
-
 
             $email = (new Email()) // si avec Template TemplatedEmail()
                 ->from('email@demo.com')
@@ -36,6 +34,11 @@ class NotificationController extends AbstractController
                 ->text('Corps du mail');
 
             //$mailer->send($email);
+            
+            $this->addFlash(
+                'notice',
+                'thanks for the message'
+            );
 
 
 
@@ -56,12 +59,8 @@ class NotificationController extends AbstractController
             // redirection
 
 
-        $this->addFlash(
-            'notice',
-            'thanks for the message'
-        );
 
-        }
+
 
 
         return $this->render('home/index.html.twig', [
