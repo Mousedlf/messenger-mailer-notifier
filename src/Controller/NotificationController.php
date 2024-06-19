@@ -23,6 +23,12 @@ class NotificationController extends AbstractController
         $user = $this->getUser();
         $notifierService->send($user, Channel::EMAIL, "topic", "body");
 
+    
+        $this->addFlash(
+            'notice',
+            'notification sent'
+        );
+
        return $this->redirectToRoute('app_home');
     }
 

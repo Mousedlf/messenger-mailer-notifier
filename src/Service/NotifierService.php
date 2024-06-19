@@ -28,7 +28,7 @@ class NotifierService
             $this->mailer->send($email);
 
 
-        } elseif( $channel == "sms"){
+        } elseif($channel == "sms"){
 
             $sms = new SmsMessage(
                 '+'.$user->getNumber(),
@@ -38,12 +38,13 @@ class NotifierService
             $this->texter->send($sms);
 
 
-        } elseif( $channel == "push"){
+        } elseif($channel == "push"){
 
             // PUSH https://symfony.com/doc/current/notifier.html#push-channel
 
         }
 
-            
+           
+        // return qqchose?
     }
 }
