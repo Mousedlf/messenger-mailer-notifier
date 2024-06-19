@@ -2,81 +2,29 @@
 
 namespace App\Controller;
 
-use App\Contact;
-use App\Form\ContactType;
-use App\Message\Notification;
+use App\Channel;
+use App\Service\NotifierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Notifier\Message\SmsMessage;
-use Symfony\Component\Notifier\TexterInterface;
 
 class NotificationController extends AbstractController
 {
 
-    #[Route('/form', name: 'app_form')]
-    public function form(MailerInterface $mailer, TexterInterface $texter, Request $request): Response
+    #[Route('/', name: 'app_form')]
+    public function notify(NotifierService $notifierService): Response
     {
-        $data = new Contact();
-        $form = $this->createForm(ContactType::class, $data);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        $user = $this->getUser();
+
+        $notifierService->send($user, Channel::EMAIL, "topic", "body");
 
 
-            $email = (new Email()) // si avec Template TemplatedEmail()
-                ->from('email@demo.com')
-                ->to($data->email)
-                ->subject('Confirmation message formulaire')
-                ->text('Corps du mail');
-
-            //$mailer->send($email);
-            
-            $this->addFlash(
-                'notice',
-                'thanks for the message'
-            );
+       /**   OBJECTIF :  $notifierService->send($user, Channel::EMAIL, "topic", "body");
+            */
 
 
-
-            } else { //envoi sms
-
-            $sms = new SmsMessage(
-                '+33641004114',
-                'Ce message va t-il arriver ?'
-            );
-            $texter->send($sms);
-
-            //($sms);
-    
-            }
-
-
-            // message validation
-            // redirection
-
-
-
-
-
-
-        return $this->render('home/index.html.twig', [
-            'form'=> $form
-        ]);
+        return $this->render('home/index.html.twig', []);
     }
 
 
 }
-
-// https://grafikart.fr/tutoriels/symfony-contact-mailer-2187#autoplay
-
-// symfony console messenger:consume async 
-// CONSUMMING -> traitement automatique
-// https://symfony.com/doc/current/messenger.html#consuming-messages-running-the-worker
-
-
-// twilio 5A2K491A3SVYDWEQZWY789YU
-// 12088259204
