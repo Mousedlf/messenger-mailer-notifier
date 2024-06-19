@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Channel;
+use App\Form\ContactType;
+use App\Interface\NotifiableUserInterface;
 use App\Service\NotifierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +20,11 @@ class NotificationController extends AbstractController
 
 
     #[Route('/notify', name: 'notify')]
-    public function notify(NotifierService $notifierService): Response
+    public function notify(NotifierService $notifierService, NotifiableUserInterface $user): Response
     {
-        $user = $this->getUser();
         $notifierService->send($user, Channel::EMAIL, "topic", "body");
+
+
 
     
         $this->addFlash(

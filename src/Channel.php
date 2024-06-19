@@ -5,10 +5,10 @@ namespace App;
  class Channel
 {
 
-    public const EMAIL = 'email';
-    public const SMS = 'sms';
-    public const PUSH = 'push';
-    public const INAPP = 'inapp';
+    public const EMAIL = 'EMAIL';
+    public const SMS = 'SMS';
+    public const PUSH = 'PUSH';
+    public const INAPP = 'INAPP';
 
 
 
