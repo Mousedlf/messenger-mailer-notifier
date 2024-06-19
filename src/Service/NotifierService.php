@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Entity\User;
 use Symfony\Component\Notifier\TexterInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
@@ -13,13 +12,12 @@ class NotifierService
 {
     public function __construct(
         private MailerInterface $mailer,
-        private TexterInterface $texter
+        private TexterInterface $texter,
     ){}
 
-    public function send($user, $channel, $topic, $body) // $user 
+    public function send($user, $channel, $topic, $body)
     {
               
-
         if($channel == "email"){
 
             $email = (new Email()) // si on veut avec template twig-> TemplatedEmail()
@@ -33,9 +31,10 @@ class NotifierService
         } elseif( $channel == "sms"){
 
             $sms = new SmsMessage(
-                $user->getNumber(),
+                '+'.$user->getNumber(),
                 $body
             );
+
             $this->texter->send($sms);
 
 
@@ -45,8 +44,6 @@ class NotifierService
 
         }
 
-
-        return 'notif sent';
             
     }
 }

@@ -10,20 +10,20 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class NotificationController extends AbstractController
 {
+    #[Route('/', name:'app_home')]
+    public function home() : Response
+    {
+        return $this->render('home/index.html.twig', []);
+    }
 
-    #[Route('/', name: 'app_form')]
+
+    #[Route('/notify', name: 'notify')]
     public function notify(NotifierService $notifierService): Response
     {
         $user = $this->getUser();
-
         $notifierService->send($user, Channel::EMAIL, "topic", "body");
 
-
-       /**   OBJECTIF :  $notifierService->send($user, Channel::EMAIL, "topic", "body");
-            */
-
-
-        return $this->render('home/index.html.twig', []);
+       return $this->redirectToRoute('app_home');
     }
 
 
