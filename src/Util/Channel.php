@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Util;
 
- class Channel
+class Channel
 {
 
     public const EMAIL = 'EMAIL';

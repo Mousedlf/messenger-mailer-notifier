@@ -14,21 +14,10 @@
 
 
 
-{% if app.user is not null %}
-
 
 
 <a href="{{ path('notify') }} " class="btn btn-primary">Notify</a>
 
-
-{% else %}
-
-<p>you have to be authenticated to receive a notification</p>
-
-<a href="{{ path('app_register') }} " class="btn btn-outline-primary">Sign in </a><br>
-<a href="{{ path('app_login') }} " class="btn btn-primary">Log in</a>
-
-{% endif %}
 
 
 

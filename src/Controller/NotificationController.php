@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Channel;
-use App\Form\ContactType;
+use App\Util\Channel;
 use App\Interface\NotifiableUserInterface;
 use App\Service\NotifierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

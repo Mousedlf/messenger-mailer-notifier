@@ -2,14 +2,12 @@
 
 namespace App\Interface;
 
-/**
- * @property int $id;
- * @property string $email;
- * @property string $number;
- */
 
-interface NotifiableUserInterface
+interface NotifiableUserInterface 
 {
+    public function getEmail(): ?string;
+    public function setEmail(string $email): static;
+
 
     
 }
