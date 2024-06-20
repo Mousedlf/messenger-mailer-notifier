@@ -20,14 +20,16 @@ class NotifierService
     public function send(NotifiableUserInterface $user, string $channel, string $topic, string $body)
     {
 
+        $user->setEmail("mail@demo.fr");
+        $user->setNumber("O12932938");
+
+
      
         if ($channel == Channel::EMAIL) {
 
-            dd($user);
-
             $email = (new Email()) // si on veut avec template twig-> TemplatedEmail()
                 ->from('email@demo.com')
-                ->to() // recup email du User
+                ->to($user->getEmail())
                 ->subject($topic)
                 ->text($body);
             $this->mailer->send($email);
@@ -36,7 +38,7 @@ class NotifierService
         } else if ($channel == Channel::SMS) {
 
             $sms = new SmsMessage(
-                '+', // recup number du User
+                '+'.$user->getNumber(), 
                 $body
             );
 

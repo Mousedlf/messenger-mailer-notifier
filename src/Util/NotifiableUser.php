@@ -11,6 +11,7 @@ class NotifiableUser implements NotifiableUserInterface
     private string $number;
 
 
+// email
     public function getEmail(): ?string 
     {
         return $this->email;
@@ -19,6 +20,19 @@ class NotifiableUser implements NotifiableUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+        return $this;
+    }
+
+//number
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?string $number): static
+    {
+        $this->number = $number;
+
         return $this;
     }
 
