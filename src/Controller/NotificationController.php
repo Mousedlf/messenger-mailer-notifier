@@ -8,6 +8,7 @@ use App\Service\NotifierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class NotificationController extends AbstractController
 {
@@ -19,10 +20,13 @@ class NotificationController extends AbstractController
 
 
     #[Route('/notify', name: 'notify')]
-    public function notify(NotifierService $notifierService, NotifiableUserInterface $user): Response
+    public function notify(NotifierService $notifierService,  NotifiableUserInterface $user): Response
     {
+      
+        /** @var NotifiableUserInterface $user */
         $user = $this->getUser();
-        
+
+        // dd($user);
 
         $notifierService->send($user, Channel::PUSH, "topic", "body");
 
