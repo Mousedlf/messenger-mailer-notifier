@@ -21,15 +21,13 @@ class NotificationController extends AbstractController
     #[Route('/notify', name: 'notify')]
     public function notify(NotifierService $notifierService, NotifiableUserInterface $user): Response
     {
-        $notifierService->send($user, Channel::EMAIL, "topic", "body");
+
+        //$user = $this->getUser();
+
+        $notifierService->send($user, Channel::PUSH, "topic", "body");
 
 
-
-    
-        $this->addFlash(
-            'notice',
-            'notification sent'
-        );
+        $this->addFlash('notice','notification sent');
 
        return $this->redirectToRoute('app_home');
     }
