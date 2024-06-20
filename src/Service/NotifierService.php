@@ -49,9 +49,13 @@ class NotifierService
             // PUSH https://symfony.com/doc/current/notifier.html#push-channel
 
         }
-
-
-    // def dans service.yaml monolog.logger.user_notifier
+   
+    
+     /**
+         * creation custom channel ds monolog.yaml
+         * def dans service.yaml -> monolog.logger.user_notifier
+         * voir ts les logger disponibles : php bin/console debug:autowiring logger
+     */
     $this->userNotifierLogger->info($channel.' was sent to '.$user->getEmail());
            
     }
