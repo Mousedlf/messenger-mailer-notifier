@@ -4,8 +4,13 @@ monolog:
 
 when@dev:
     monolog:
-        channels: ["user_notifier"]
+        channels: ["user_notifier", "db_notification"]
         handlers:
+            db_notification_handler:
+                type: service
+                level: debug
+                id: monolog.db_notification_handler
+                channels: ["db_notification"]
             notification_handler:
                 type: stream
                 path: "%kernel.logs_dir%/notifier.log"

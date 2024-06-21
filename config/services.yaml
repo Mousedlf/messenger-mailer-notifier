@@ -13,16 +13,20 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    App\Service\NotifierService:
-        arguments:
-            #$logger: 'monolog.logger.user_notifier'
-            tags: 
-            - { name: monolog.logger, channel: user_notifier }
     App\:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    App\Service\NotifierService:
+        arguments:
+            $userNotifierLogger: '@monolog.logger.user_notifier'    
+            $dbNotificationLogger: '@monolog.logger.db_notification'     
+    monolog.db_notification_handler:
+        class: App\Util\MonologDBHandler
+        arguments: 
+            - "@doctrine.orm.entity_manager"
+
         # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

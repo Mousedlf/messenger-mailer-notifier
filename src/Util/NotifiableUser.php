@@ -9,6 +9,7 @@ class NotifiableUser implements NotifiableUserInterface
     private $id;
     private string $email;
     private string $number;
+    // private string $deviceToken;
 
 
 //email

@@ -16,7 +16,8 @@ class NotifierService
     public function __construct(
         private MailerInterface $mailer,
         private TexterInterface $texter,
-        private LoggerInterface $userNotifierLogger
+        private LoggerInterface $userNotifierLogger,
+        private LoggerInterface $dbNotificationLogger
     ){}
 
     public function send(NotifiableUserInterface $user, string $channel, string $topic, string $body)
@@ -57,6 +58,12 @@ class NotifierService
          * voir ts les logger disponibles : php bin/console debug:autowiring logger
      */
     $this->userNotifierLogger->info($channel.' was sent to '.$user->getEmail());
+
+
+    /**
+     * creation custom channel + custom class Handler + Entity NotificationLog
+     */
+     $this->dbNotificationLogger->info('lala', [$channel, $user]);
            
     }
 }
