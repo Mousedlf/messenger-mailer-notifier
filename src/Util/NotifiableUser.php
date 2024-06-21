@@ -3,6 +3,7 @@
 namespace App\Util;
 
 use App\Interface\NotifiableUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class NotifiableUser implements NotifiableUserInterface
 {

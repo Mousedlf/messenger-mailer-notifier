@@ -26,7 +26,7 @@ class MonologDBHandler extends AbstractProcessingHandler
         $logEntry->setLevel($record->level->name);
         $logEntry->setCreatedAt($record->datetime);
         $logEntry->setChannel($record->context[0]);
-        //ajout user->usernama etc.
+        //ajout user->username etc.
 
         $this->entityManager->persist($logEntry);
         $this->entityManager->flush();

@@ -10,5 +10,7 @@ interface NotifiableUserInterface
 
     public function getNumber(): ?string;
     public function setNumber(string $number): static;
+
+    // getter et setter DeviceToken
     
 }
