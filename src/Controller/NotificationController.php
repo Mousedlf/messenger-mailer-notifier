@@ -20,11 +20,8 @@ class NotificationController extends AbstractController
 
 
     #[Route('/notify', name: 'notify')]
-    public function notify( NotifierService $notifierService): Response  // #[CurrentUser] NotifiableUserInterface $user, 
+    public function notify( NotifierService $notifierService, #[CurrentUser] ?NotifiableUserInterface $user): Response  // , 
     {
-
-   //     /** @var NotifiableUserInterface $user */
-        $user = $this->getUser();
 
         $notifierService->send($user, Channel::EMAIL, "topic", "body");
 
