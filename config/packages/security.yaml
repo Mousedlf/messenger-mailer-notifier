@@ -9,8 +9,6 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
-        ##### ajout custom provider ?
-        ##### préciser quand il est utilisé ? dans quel controller ?
 
     firewalls:
         dev:
