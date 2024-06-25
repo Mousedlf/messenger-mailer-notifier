@@ -5,3 +5,4 @@
 Notifier : https://symfony.com/doc/current/notifier.html <br>
 Mailer : https://symfony.com/doc/current/mailer.html <br>
 Messenger : https://symfony.com/doc/current/messenger.html <br>
+Logger : https://symfony.com/doc/current/logging.html
